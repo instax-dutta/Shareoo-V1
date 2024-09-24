@@ -4,32 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Sharing</title>
-</head>
-<body>
-    <h1>Upload File</h1>
-    <form action="/api/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" required><br><br>
-        <label for="expiry">Select Expiry Time:</label>
-        <select name="expiry">
-            <option value="10">10 Minutes</option>
-            <option value="60">1 Hour</option>
-            <option value="1440">1 Day</option>
-            <option value="10080">7 Days</option>
-        </select><br><br>
-        <button type="submit">Upload</button>
-    </form>
-
-    <h1>Download File</h1>
-    <form action="/api/download" method="GET">
-        <input type="text" name="code" placeholder="Enter 6-digit code" required>
-        <button type="submit">Download</button>
-    </form>
-</body><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Sharing</title>
     <style>
         body {
             background-color: #1a1a1a;
