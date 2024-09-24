@@ -1,0 +1,5 @@
+access link - blr1.kos.olakrutrimsvc.com
+access key - UDDO8PTTQGSUYXRZ26MW
+secret key - tY5v1duhXYCEcXRLUt+frQ3UDuF1/CZy12/3ZZgo
+
+mongodb+srv://sharer:racerop@cluster0.hsrjx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
