@@ -1,11 +1,10 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const fileSchema = new mongoose.Schema({
-    code: String,
-    fileName: String,
-    expiry: Date,
+const fileSchema = new Schema({
+  downloadCode: { type: String, required: true, unique: true },
+  s3Key: { type: String, required: true },
+  expiry: { type: Date, required: true },
 });
 
-const File = mongoose.models.File || mongoose.model('File', fileSchema);
-
-export default File;
+module.exports = mongoose.model('File', fileSchema);
