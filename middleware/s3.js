@@ -2,40 +2,43 @@ const AWS = require('aws-sdk');
 
 // Configure the Ola Krutrim Cloud S3 connection
 const s3 = new AWS.S3({
-    accessKeyId: process.env.OLA_ACCESS_KEY, // Access key from the environment variable
-    secretAccessKey: process.env.OLA_SECRET_KEY, // Secret key from the environment variable
+    accessKeyId: process.env.OLA_ACCESS_KEY, // Access key from environment variables
+    secretAccessKey: process.env.OLA_SECRET_KEY, // Secret key from environment variables
     endpoint: 'https://blr1.kos.olakrutrimsvc.com', // Krutrim Cloud endpoint
-    s3ForcePathStyle: true, // To handle bucket paths correctly
-    signatureVersion: 'v4' // Use v4 for signature
+    region: 'blr1', // Set region
+    s3ForcePathStyle: true, // Force path-style URL
+    signatureVersion: 'v4' // Use signature version v4
 });
 
 // Function to upload file to the bucket
-const uploadFile = (bucketName, key, fileContent) => {
+const uploadFile = (key, fileContent) => {
     const params = {
-        Bucket: bucketName, 
-        Key: key,
-        Body: fileContent,
-        ACL: 'public-read', // Set permissions for file
+        Bucket: 'buck01', // Your bucket name
+        Key: key, // File key (usually the file name or path)
+        Body: fileContent, // File content to upload
+        ACL: 'public-read', // File permission (optional, can be 'private' if needed)
     };
     return s3.upload(params).promise();
 };
 
-// Function to delete file from the bucket
-const deleteFile = (bucketName, key) => {
+// Function to delete a file from the bucket
+const deleteFile = (key) => {
     const params = {
-        Bucket: bucketName,
-        Key: key,
+        Bucket: 'buck01', // Your bucket name
+        Key: key, // File key to delete
     };
     return s3.deleteObject(params).promise();
 };
 
 // Function to generate a pre-signed URL for downloading a file
-const getSignedUrl = (bucketName, key, expires) => {
+const getSignedUrl = (key, expiresIn) => {
     const params = {
-        Bucket: bucketName,
-        Key: key,
-        Expires: expires, // Set expiration time for the link in seconds
+        Bucket: 'buck01', // Your bucket name
+        Key: key, // File key
+        Expires: expiresIn || 60, // Expiration time for the signed URL (in seconds)
     };
+
+    // Generate and return the signed URL for downloading the file
     return s3.getSignedUrlPromise('getObject', params);
 };
 
